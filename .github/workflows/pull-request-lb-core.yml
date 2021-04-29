@@ -5,6 +5,7 @@ name: Build, Test, and Prepare Release Candidate
 
 on:
   pull_request:
+    types: [ opened, reopened, synchronize ]
     branches:
       - '**org.liquibase-liquibase-core-*'
 

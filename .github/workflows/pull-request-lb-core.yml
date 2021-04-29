@@ -6,7 +6,7 @@ name: Build, Test, and Prepare Release Candidate
 on:
   pull_request:
     branches:
-      - dependabot/maven/org.liquibase-liquibase-core-*
+      - '**/org.liquibase-liquibase-core-*'
 
 jobs:
   test:

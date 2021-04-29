@@ -6,7 +6,7 @@ name: Run Unit Tests
 on:
   pull_request:
     branches-ignore:
-      - '**/org.liquibase-liquibase-core-*'
+      - '**org.liquibase-liquibase-core-*'
 
 jobs:
   test:

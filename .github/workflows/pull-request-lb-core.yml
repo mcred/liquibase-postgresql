@@ -4,9 +4,9 @@
 name: Build, Test, and Prepare Release Candidate
 
 on:
-  label:
+  pull_request:
     types:
-      - created
+      - labeled
 
 jobs:
   test:

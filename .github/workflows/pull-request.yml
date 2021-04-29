@@ -29,3 +29,14 @@ jobs:
         distribution: 'adopt'
     - name: Run Unit Tests With Maven
       run: mvn surefire:test --file pom.xml
+
+  label:
+    name: Label as Release Candidate
+    runs-on: ubuntu-latest
+    needs: [ test ]
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"

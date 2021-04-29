@@ -4,15 +4,15 @@
 name: Build, Test, and Prepare Release Candidate
 
 on:
-  pull_request:
-    types: [ opened, reopened, synchronize ]
-    branches:
-      - "**org.liquibase-liquibase-core-*"
+  label:
+    types:
+      - created
 
 jobs:
   test:
     name: Java ${{ matrix.java }}, Postgres ${{ matrix.postgres }}
     runs-on: ubuntu-latest
+    if: contains( github.event.label.labels.*.name, 'test' )
     strategy:
       matrix:
         java: [8, 11, 16]

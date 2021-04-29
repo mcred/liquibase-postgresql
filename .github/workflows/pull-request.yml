@@ -3,11 +3,7 @@
 
 name: Run Unit Tests
 
-on:
-  pull_request:
-    types: [ opened, reopened, synchronize ]
-    branches-ignore:
-      - "**org.liquibase-liquibase-core-*"
+on: pull_request
 
 jobs:
   test:

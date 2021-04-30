@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -ex
 set -o pipefail
 
 if [[ -z "$GITHUB_TOKEN" ]]; then

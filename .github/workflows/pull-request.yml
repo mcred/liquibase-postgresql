@@ -40,4 +40,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ISSUE_URL: ${{ github.event.pull_request.issue.href }}
-          GITHUB_LABEL: "Extension Release Candidate :rocket:"
+          GITHUB_LABEL: '["Extension Release Candidate :rocket:"]'

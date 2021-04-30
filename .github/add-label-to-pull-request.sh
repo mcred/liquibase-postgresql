@@ -20,5 +20,5 @@ fi
 
 #Create Label on Pull Request
 curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
-  --data "[\"$GITHUB_LABEL\"]" \
+  --data '["' + $GITHUB_LABEL + '"]' \
   $GITHUB_ISSUE_URL

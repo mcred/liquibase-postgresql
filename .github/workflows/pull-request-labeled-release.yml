@@ -7,9 +7,11 @@ on:
   pull_request:
     types:
       - labeled
+      - reopened
+      - synchronize
 
 jobs:
-  test:
+  integration-tests:
     name: Java ${{ matrix.java }}, Postgres ${{ matrix.postgres }}
     runs-on: ubuntu-latest
     if: contains( github.event.pull_request.labels.*.name, 'Extension Release Candidate :rocket:' )

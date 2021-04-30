@@ -3,7 +3,12 @@
 
 name: Run Unit Tests
 
-on: pull_request
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
 
 jobs:
   unit-test:

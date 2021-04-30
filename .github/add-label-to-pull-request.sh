@@ -18,7 +18,9 @@ if [[ -z "$GITHUB_LABEL" ]]; then
   exit 1
 fi
 
+data='["'${GITHUB_LABEL}'"]'
+
 #Create Label on Pull Request
 curl -X POST -H "Authorization: token $GITHUB_TOKEN" \
-  --data '["' + $GITHUB_LABEL + '"]' \
+  --data data \
   $GITHUB_ISSUE_URL

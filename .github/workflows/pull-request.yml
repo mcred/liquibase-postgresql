@@ -42,3 +42,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
           GITHUB_ISSUE_URL: ${{ github.event.pull_request._links.issue.href }}
           GITHUB_LABEL: "Extension Release Candidate :rocket:"
+      - run: ./.github/add-comment-to-pull-request.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
+          GITHUB_ISSUE_URL: ${{ github.event.pull_request._links.issue.href }}
+          GITHUB_COMMENT: "## Release Candidate pull requests will automatically release when merged. Please review and merge all other pull requests prior to merging this request."

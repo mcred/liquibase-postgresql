@@ -34,9 +34,6 @@ jobs:
     name: Label as Release Candidate
     runs-on: ubuntu-latest
     needs: [ test ]
+    if: contains( github.event.pull_request.head.ref, 'dependabot/maven/org.liquibase-liquibase-core' )
     steps:
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: |
-          echo "$GITHUB_CONTEXT"
+      - run: echo "hi"

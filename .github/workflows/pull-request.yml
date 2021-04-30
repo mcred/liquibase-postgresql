@@ -36,7 +36,7 @@ jobs:
     needs: [ unit-test ]
     if: contains( github.event.pull_request.head.ref, 'dependabot/maven/org.liquibase-liquibase-core' )
     steps:
-      - run: ./.github/add-label-to-pull-request.sh
+      - run: .github/add-label-to-pull-request.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ISSUE_URL: ${{ github.event.pull_request._links.issue.href }}

@@ -39,5 +39,5 @@ jobs:
       - run: ./github/add-label-to-pull-request.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_ISSUE_URL: ${{ fromJson(github.event.pull_request.issue.href) }}
+          GITHUB_ISSUE_URL: ${{ github.event.pull_request.issue.href }}
           GITHUB_LABEL: "Extension Release Candidate :rocket:"

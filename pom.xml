@@ -103,6 +103,7 @@
 				<plugin>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<configuration>
+						<skipTests>false</skipTests>
 						<redirectTestOutputToFile>true</redirectTestOutputToFile>
 						<reportFormat>plain</reportFormat>
 					</configuration>
@@ -114,7 +115,6 @@
 								<goal>test</goal>
 							</goals>
 							<configuration>
-								<skipTests>false</skipTests>
 								<includes>
 									<include>**/*Test.java</include>
 								</includes>
@@ -127,7 +127,6 @@
 								<goal>test</goal>
 							</goals>
 							<configuration>
-								<skipTests>false</skipTests>
 								<includes>
 									<include>**/*IT.*</include>
 									<include>**/*Tests.*</include>

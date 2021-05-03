@@ -27,7 +27,7 @@ jobs:
       - name: Publish to the Maven Central Repository
         run: |
           mvn \
-            -DskipTests=true \
+            -Dmaven.test.skip=true \
             --no-transfer-progress \
             --batch-mode \
             -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} \

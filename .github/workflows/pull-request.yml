@@ -42,13 +42,21 @@ jobs:
     if: contains( github.event.pull_request.head.ref, 'dependabot/maven/org.liquibase-liquibase-core' )
     steps:
       - uses: actions/checkout@v2
-      - run: ./.github/add-label-to-pull-request.sh
-        env:
-          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
-          GITHUB_ISSUE_URL: ${{ github.event.pull_request._links.issue.href }}
-          GITHUB_LABEL: "Extension Release Candidate :rocket:"
-      - run: ./.github/add-comment-to-pull-request.sh
-        env:
-          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
-          GITHUB_ISSUE_URL: ${{ github.event.pull_request._links.issue.href }}
-          GITHUB_COMMENT: "<h2> ⚠️  Reminder</h2>Release Candidate pull requests will automatically release when merged.<br /><br />Please review and merge all other pull requests prior to merging this request."
+      - name: Set Version Tag ENV
+        run: ./.github/set-version-from-head.sh ${{ github.event.pull_request.head.ref }}
+
+      - run: echo $VERSION_TAG
+          
+
+      # bump version
+      # create tag
+#      - run: ./.github/add-label-to-pull-request.sh
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
+#          GITHUB_ISSUE_URL: ${{ github.event.pull_request._links.issue.href }}
+#          GITHUB_LABEL: "Extension Release Candidate :rocket:"
+#      - run: ./.github/add-comment-to-pull-request.sh
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
+#          GITHUB_ISSUE_URL: ${{ github.event.pull_request._links.issue.href }}
+#          GITHUB_COMMENT: "<h2> ⚠️  Reminder</h2>Release Candidate pull requests will automatically release when merged.<br /><br />Please review and merge all other pull requests prior to merging this request."

@@ -48,10 +48,15 @@ jobs:
       - run: echo $VERSION_TAG
 
       - name: Bump POM Version for Next Release
-        run: mvn versions:set -DnewVersion=$VERSION_TAG
+        run: |
+          mvn versions:set -DnewVersion=$VERSION_TAG
+          git add .
+          git commit -m "Version Bumped to $VERSION_TAG"
 
       - name: Push New Version Tag
-        run: git push origin tag liquibase-postgresql-$VERSION_TAG
+        run: |
+          git tag liquibase-postgresql-$VERSION_TAG
+          git push origin liquibase-postgresql-$VERSION_TAG
 
 #      - run: ./.github/add-label-to-pull-request.sh
 #        env:

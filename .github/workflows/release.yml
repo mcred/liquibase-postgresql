@@ -24,13 +24,8 @@ jobs:
           gpg-passphrase: GPG_PASSPHRASE
 
       - name: Publish to the Maven Central Repository
-        run: |
-          mvn \
-            -Dmaven.test.skip=true \
-            --no-transfer-progress \
-            --batch-mode \
-            clean deploy --file pom.xml
+        run: mvn clean deploy -Dmaven.test.skip
         env:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.SONATYPE_TOKEN }}
+          MAVEN_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}

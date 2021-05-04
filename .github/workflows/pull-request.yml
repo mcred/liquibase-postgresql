@@ -51,14 +51,15 @@ jobs:
         run: |
           git config user.name "liquibot"
           git config user.email "liquibot@liquibase.org"
+          git config --global push.followTags true
 
       - name: Bump POM Version for Next Release
         run: |
           mvn versions:set -DnewVersion=$VERSION_TAG
           git add pom.xml
           git commit -m "Version Bumped to $VERSION_TAG"
-          git tag liquibase-postgresql-$VERSION_TAG
-          git push --atomic origin ${{ github.event.pull_request.head.ref }} liquibase-postgresql-$VERSION_TAG
+          git tag -a -m "Version Bumped to $VERSION_TAG" liquibase-postgresql-$VERSION_TAG
+          git push
 
 #      - run: ./.github/add-label-to-pull-request.sh
 #        env:

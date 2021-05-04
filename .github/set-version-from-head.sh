@@ -6,7 +6,7 @@ set -o pipefail
 HEAD_REF=$1
 
 if [[ -z "$HEAD_REF" ]]; then
-  echo "Set the GITHUB_TOKEN env variable."
+  echo "Set the HEAD_REF parameter"
   exit 1
 fi
 

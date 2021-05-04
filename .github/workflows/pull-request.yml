@@ -46,10 +46,13 @@ jobs:
         run: ./.github/set-version-from-head.sh ${{ github.event.pull_request.head.ref }}
 
       - run: echo $VERSION_TAG
-          
 
-      # bump version
-      # create tag
+      - name: Bump POM Version for Next Release
+        run: mvn versions:set -DnewVersion=$VERSION_TAG
+
+      - name: Push New Version Tag
+        run: git push origin tag liquibase-postgresql-$VERSION_TAG
+
 #      - run: ./.github/add-label-to-pull-request.sh
 #        env:
 #          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}

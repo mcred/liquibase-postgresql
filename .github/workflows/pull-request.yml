@@ -59,7 +59,10 @@ jobs:
       - name: Bump POM Version for Next Release
         run: |
           mvn versions:set -DnewVersion=$VERSION_TAG
+          git add pom.xml
           git tag -a -m "Version Bumped to $VERSION_TAG" liquibase-postgresql-$VERSION_TAG
+          git commit -m "Version Bumped to $VERSION_TAG"
+          git push "https://${{ GITHUB_ACTOR }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ GITHUB_REPOSITORY }}.git" HEAD:${{ github.event.pull_request.head.ref }} --follow-tags --tags
 
       - name: Commit & Push changes
         uses: actions-js/push@master

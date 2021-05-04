@@ -57,9 +57,6 @@ jobs:
           mvn versions:set -DnewVersion=$VERSION_TAG
           git add pom.xml
           git commit -m "Version Bumped to $VERSION_TAG"
-
-      - name: Push New Version Tag
-        run: |
           git tag liquibase-postgresql-$VERSION_TAG
           git push --atomic origin ${{ github.event.pull_request.head.ref }} liquibase-postgresql-$VERSION_TAG
 

@@ -61,7 +61,7 @@ jobs:
       - name: Push New Version Tag
         run: |
           git tag liquibase-postgresql-$VERSION_TAG
-          git push origin liquibase-postgresql-$VERSION_TAG
+          git push origin --follow-tags
 
 #      - run: ./.github/add-label-to-pull-request.sh
 #        env:

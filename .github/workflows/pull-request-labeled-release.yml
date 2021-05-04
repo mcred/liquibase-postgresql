@@ -45,7 +45,7 @@ jobs:
       run: mvn clean verify --file pom.xml
       
   build:
-    needs: [test]
+    needs: [integration-tests]
     name: Build Artifacts
     runs-on: ubuntu-latest
     steps:

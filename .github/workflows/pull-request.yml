@@ -64,21 +64,13 @@ jobs:
           git commit -m "Version Bumped to $VERSION_TAG"
           git push "https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git" HEAD:${{ github.event.pull_request.head.ref }} --follow-tags --tags
 
-      - name: Commit & Push changes
-        uses: actions-js/push@master
-        with:
-          branch: ${{ github.event.pull_request.head.ref }}
-          message: "Version Bumped to $VERSION_TAG"
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          tags: true
-
-#      - run: ./.github/add-label-to-pull-request.sh
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
-#          GITHUB_ISSUE_URL: ${{ github.event.pull_request._links.issue.href }}
-#          GITHUB_LABEL: "Extension Release Candidate :rocket:"
-#      - run: ./.github/add-comment-to-pull-request.sh
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
-#          GITHUB_ISSUE_URL: ${{ github.event.pull_request._links.issue.href }}
-#          GITHUB_COMMENT: "<h2> ⚠️  Reminder</h2>Release Candidate pull requests will automatically release when merged.<br /><br />Please review and merge all other pull requests prior to merging this request."
+      - run: ./.github/add-label-to-pull-request.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
+          GITHUB_ISSUE_URL: ${{ github.event.pull_request._links.issue.href }}
+          GITHUB_LABEL: "Extension Release Candidate :rocket:"
+      - run: ./.github/add-comment-to-pull-request.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
+          GITHUB_ISSUE_URL: ${{ github.event.pull_request._links.issue.href }}
+          GITHUB_COMMENT: "<h2> ⚠️  Reminder</h2>Release Candidate pull requests will automatically release when merged.<br /><br />Please review and merge all other pull requests prior to merging this request."

@@ -11,11 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - id: install-secret-key
-        name: Install gpg secret key
-        run: |
-          cat <(echo -e "${{ secrets.GPG_SECRET }}") | gpg --batch --import
-          gpg --list-secret-keys --keyid-format LONG
+
       - name: Set up Java for publishing to Maven Central Repository
         uses: actions/setup-java@v2
         with:
@@ -24,14 +20,18 @@ jobs:
           server-id: sonatype-nexus-staging
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
+          gpg-private-key: GPG_SECRET
+          gpg-passphrase: GPG_PASSPHRASE
+
       - name: Publish to the Maven Central Repository
         run: |
           mvn \
             -Dmaven.test.skip=true \
             --no-transfer-progress \
             --batch-mode \
-            -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }} \
             clean deploy --file pom.xml
         env:
           MAVEN_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.SONATYPE_TOKEN }}
+          GPG_SECRET: ${{ secrets.GPG_SECRET }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}

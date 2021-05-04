@@ -47,6 +47,11 @@ jobs:
 
       - run: echo $VERSION_TAG
 
+      - name: Configure git user
+        run: |
+          git config user.name "liquibot"
+          git config user.email "liquibot@users.noreply.github.com"
+
       - name: Bump POM Version for Next Release
         run: |
           mvn versions:set -DnewVersion=$VERSION_TAG

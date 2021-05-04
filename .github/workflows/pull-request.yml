@@ -50,12 +50,12 @@ jobs:
       - name: Configure git user
         run: |
           git config user.name "liquibot"
-          git config user.email "liquibot@users.noreply.github.com"
+          git config user.email "liquibot@liquibase.org"
 
       - name: Bump POM Version for Next Release
         run: |
           mvn versions:set -DnewVersion=$VERSION_TAG
-          git add .
+          git add pom.xml
           git commit -m "Version Bumped to $VERSION_TAG"
 
       - name: Push New Version Tag

@@ -42,24 +42,33 @@ jobs:
     if: contains( github.event.pull_request.head.ref, 'dependabot/maven/org.liquibase-liquibase-core' )
     steps:
       - uses: actions/checkout@v2
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+
       - name: Set Version Tag ENV
         run: ./.github/set-version-from-head.sh ${{ github.event.pull_request.head.ref }}
 
       - run: echo $VERSION_TAG
 
-      - name: Configure git user
-        run: |
-          git config user.name "liquibot"
-          git config user.email "liquibot@liquibase.org"
-          git config --global push.followTags true
+#      - name: Configure git user
+#        run: |
+#          git config user.name "liquibot"
+#          git config user.email "liquibot@liquibase.org"
+#          git config --global push.followTags true
 
       - name: Bump POM Version for Next Release
         run: |
           mvn versions:set -DnewVersion=$VERSION_TAG
-          git add pom.xml
-          git commit -m "Version Bumped to $VERSION_TAG"
           git tag -a -m "Version Bumped to $VERSION_TAG" liquibase-postgresql-$VERSION_TAG
-          git push origin HEAD:${{ github.event.pull_request.head.ref }}
+
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          branch: ${{ github.event.pull_request.head.ref }}
+          message: "Version Bumped to $VERSION_TAG"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          tags: true
 
 #      - run: ./.github/add-label-to-pull-request.sh
 #        env:

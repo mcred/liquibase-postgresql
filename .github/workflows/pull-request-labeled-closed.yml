@@ -29,13 +29,16 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
+
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
           java-version: '11'
           distribution: 'adopt'
+
       - name: Build With Maven
         run: mvn -B package -DskipTests --file pom.xml
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
@@ -76,6 +79,8 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
+          target_commitish: ${{ github.sha }}
+          name: v${{ steps.version.outputs.version }}
           tag_name: liquibase-postgresql-${{ steps.version.outputs.version }}
           draft: true
           body: Support for Liquibase ${{ steps.version.outputs.version }}.

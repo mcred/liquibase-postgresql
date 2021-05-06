@@ -64,7 +64,8 @@ jobs:
       - name: Set Version Tag ENV from POM
         run: ./.github/set-version-from-pom.sh
 
-      - run: echo $VERSION_TAG
+      - run: echo ::set-output name=version::$VERSION_TAG
+        id: version
 
       - name: Download Artifacts
         uses: actions/download-artifact@v2
@@ -74,9 +75,9 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: liquibase-postgresql-${{ VERSION_TAG }}
+          tag_name: liquibase-postgresql-${{ steps.version.outputs.version }}
           draft: true
-          body: Support for Liquibase ${{ VERSION_TAG }}.
+          body: Support for Liquibase ${{ steps.version.outputs.version }}.
           files: liquibase-postgresql-*.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

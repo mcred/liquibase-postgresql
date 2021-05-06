@@ -74,10 +74,10 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: liquibase-postgresql-$VERSION_TAG
+          tag_name: liquibase-postgresql-${{ VERSION_TAG }}
           draft: true
-          body: Support for Liquibase $VERSION_TAG.
-          files: liquibase-postgresql-$VERSION_TAG.jar
+          body: Support for Liquibase ${{ VERSION_TAG }}.
+          files: liquibase-postgresql-*.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

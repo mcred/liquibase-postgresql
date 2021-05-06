@@ -44,6 +44,7 @@ jobs:
 
   draft-release:
     needs: [ build ]
+    name: Draft Release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
